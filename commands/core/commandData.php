@@ -10,6 +10,8 @@ class commandData extends messageOptions{
     private $type = COMMAND_TYPE_TEXT;
     private $text = false;
     private $description = array();
+    public $commandBoolean = false;
+    
     /**
      * Texto a enviar, devuelve falso si el texto esta vacio
      * @param type $rawtext
@@ -61,5 +63,8 @@ class commandData extends messageOptions{
     public function getDescription($languageCode) {
         return $this->description[$languageCode];
     }
-
+    
+    public function isCommand(){
+        return $this->commandBoolean;
+    }
 }

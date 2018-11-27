@@ -1,23 +1,25 @@
 <?php
 
 require_once 'core/command.php';
-
-$dir = scandir(getcwd());
+$pathCommand = __DIR__;
+$dir = scandir($pathCommand);
 
 foreach ($dir as $command) {
-    if ($command !== basename(__FILE__, '.php')) {
-        if ($command !== "." && $command !== ".." && $command !== "core") {
-            $class = $command;
-            $file = "{$command}/{$command}.php";
-            if (file_exists($file)) {
-                //CARGAMOS LOS COMANDOS
-                require_once $file;
-                $commandClass = new $class($telegramMessage);
-                //COMPROBAMOS QUE HEREDA DE command
-                if (is_subclass_of($commandClass, "command")) {
+    if ($command !== "." && $command !== ".." && $command !== "core" && $command != "autoloadCommand.php") {
+        $class = $command;
+        $file = "{$pathCommand}/{$command}/{$command}.php";
+        if (file_exists($file)) {
+            //CARGAMOS LOS COMANDOS
+            require_once $file;
+            $commandClass = new $class($telegramMessage);
+            //COMPROBAMOS QUE HEREDA DE command
+            if (is_subclass_of($commandClass, "command")) {
+
+                //COMPROBAMOS QUE ES COMANDO
+                if ($commandClass->isCommand()) {
                     //GUARDAMOS EL COMANDO
                     if (isset($user) && method_exists($user, 'comando')) {
-                        $user->comando('pilarica elige', $text);
+                        $user->comando($text);
                     }
                     //SI ES TEXTO
                     if ($commandClass->getType() === COMMAND_TYPE_TEXT) {

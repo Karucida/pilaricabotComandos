@@ -19,11 +19,14 @@ abstract class command extends commandData{
         list($command,$textOnCommand) = explode(' ', $text, 2);
         
         if($this->getCommand()===strtolower($command)){
+            $this->commandBoolean = true;
             $this->doMagic($textOnCommand);
             //SI LA RESPUESTA ES TIPO TEXTO
             if($this->getType()===COMMAND_TYPE_TEXT){
              //COMPROBACIONES FUTURAS   
             }
+        }else{
+            $this->commandBoolean = false;
         }
     }
     
