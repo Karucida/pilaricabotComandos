@@ -8,7 +8,7 @@
 class patata extends command{
 
     public function doMagic($textOnCommand = null) {
-        $text="🍟";//icon patata
+        $text="🥔";//icon patata
         $this->setText($text);
     }
 
