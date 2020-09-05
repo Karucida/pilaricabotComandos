@@ -8,7 +8,7 @@
 class bruguii extends command{
 
     public function doMagic($textOnCommand = null) {
-        $text="@bruguii hdp";
+        $text="bruguii hdp";
         $this->setText($text);
     }
 
